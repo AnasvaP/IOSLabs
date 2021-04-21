@@ -106,14 +106,31 @@ class PhotosCollectionVC: UICollectionViewController, UIImagePickerControllerDel
         let verticalGroup = NSCollectionLayoutGroup.vertical(layoutSize:
                                                                 NSCollectionLayoutSize(
                                                                     widthDimension: .fractionalWidth(1),
-                                                                    heightDimension: .fractionalHeight(3/5)),
+                                                                    heightDimension: .fractionalWidth(1)),
                                                              subitems: [
                                                             tripletHorizontalGroup,
-                                                                horizontalGroup,
-                                                                tripletHorizontalGroup])
+                                                                horizontalGroup])
        
         verticalGroup.interItemSpacing = .fixed(CGFloat(0))
-        let section = NSCollectionLayoutSection(group: verticalGroup)
+        
+        let tripletHorizontalGroup2 = NSCollectionLayoutGroup.horizontal(layoutSize:
+                                                                            NSCollectionLayoutSize(
+                                                                                widthDimension: .fractionalWidth(1),
+                                                                                heightDimension: .fractionalHeight(1/4)),
+                                                                        subitem: tripletItems,
+                                                                        count: 3)
+        
+        let verticalGroup2 = NSCollectionLayoutGroup.vertical(layoutSize:
+                                                                NSCollectionLayoutSize(
+                                                                    widthDimension: .fractionalWidth(1),
+                                                                    heightDimension: .fractionalWidth(4/3)),
+                                                             subitems: [
+                                                            verticalGroup,
+                                                                tripletHorizontalGroup2])
+       
+        verticalGroup2.interItemSpacing = .fixed(CGFloat(0))
+        
+        let section = NSCollectionLayoutSection(group: verticalGroup2)
         return UICollectionViewCompositionalLayout(section: section)
     }
 }
