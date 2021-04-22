@@ -26,12 +26,12 @@ class PhotosCollectionVC: UICollectionViewController, UIImagePickerControllerDel
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30//arrayOfImage.count
+        return arrayOfImage.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCell
-        cell.imageOutlet.image = #imageLiteral(resourceName: "leftSwipe@x3")//arrayOfImage[arrayOfImage.count-1]
+        cell.imageOutlet.image = arrayOfImage[arrayOfImage.count-1]
         cell.clipsToBounds = true
         cell.backgroundColor = UIColor.gray
         return cell
@@ -135,30 +135,3 @@ class PhotosCollectionVC: UICollectionViewController, UIImagePickerControllerDel
     }
 }
 
-
-
-
-
-// MARK: UICollectionViewDelegateFlowLayout
-
-//extension PhotosCollectionVC: UICollectionViewDelegateFlowLayout{
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let paddingWidth = constCGFloat * (numberOfItems + 1)
-//        let availableWidth = collectionView.frame.width - paddingWidth
-//        return CGSize(width: availableWidth/numberOfItems, height: availableWidth/numberOfItems)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: constCGFloat, left: constCGFloat, bottom: constCGFloat, right: constCGFloat)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return constCGFloat
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return constCGFloat
-//    }
-//
-//}
