@@ -40,6 +40,8 @@ class ArchiveTableViewController: UITableViewController, UISearchControllerDeleg
         
         ArchiveTableViewController.data = dataFromBL.main()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(insertRow))
+        
+        getData(forRequest: "ab")
     }
     
     @objc func insertRow() {
@@ -131,6 +133,8 @@ extension ArchiveTableViewController : UISearchResultsUpdating {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+ //       let enteredDataInSearchController: String = searchController.searchBar.text!.lowercased()
+        
         ArchiveTableViewController.filteredData = [[],[],[],[],[]]
         countOfFilteredBook = 0
         for i in 0..<ArchiveTableViewController.data[0].count{
@@ -149,5 +153,26 @@ extension ArchiveTableViewController : UISearchResultsUpdating {
             label.text = "your books archive"
         }
         tableView.reloadData()
+    }
+}
+
+
+// MARK: - Get data from the internet
+extension ArchiveTableViewController{
+    
+    func getData(forRequest req: String){
+        let urlString = "https://api.itbook.store/1.0/search/\(req)"
+        guard let url = URL(string: urlString) else {return}
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            DispatchQueue.main.async {
+                if let error = error{
+                    print("we have some error")
+                    return
+                }
+                guard let data = data else {return}
+                let stringData = String(data: data, encoding: .utf8)
+                print(stringData ?? "no")
+            }
+        }.resume()
     }
 }

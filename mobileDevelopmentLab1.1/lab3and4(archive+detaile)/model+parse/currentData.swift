@@ -45,7 +45,7 @@ class DataFromBooksList {
             prices = currentData.price
             images = currentData.image
         }
-    parseBooksJSON.getData(forResource: "BooksList")
+        parseBooksJSON.getData(forResource: "BooksList")
         
         for i in 0..<images.count{
             if images[i] == "" {

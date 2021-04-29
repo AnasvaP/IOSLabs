@@ -26,6 +26,7 @@ class ParseBooksListJSON {
         }
     }
     
+    
     func parseJSON(withData data: Data) -> currentData? {
         do {
             let fileData = try JSONDecoder().decode(Github.self, from: data)
